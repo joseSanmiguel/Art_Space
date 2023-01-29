@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Art Space</string>
+    <string name="fenix">Fenix</string>
+    <string name="pegasus">Pegasus</string>
+    <string name="dragon">Dragon</string>
+    <string name="cisne">Cisne</string>
+    <string name="andromeda">Andromeda</string>
+
 </resources>
