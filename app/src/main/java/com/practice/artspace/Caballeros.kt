@@ -1,5 +1,6 @@
 package com.practice.artspace
 
+
 data class Caballeros(var nombreReal: String, var armadura: String, var poderEspecial: String){
 }
 
