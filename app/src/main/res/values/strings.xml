@@ -5,5 +5,10 @@
     <string name="dragon">Dragon</string>
     <string name="cisne">Cisne</string>
     <string name="andromeda">Andromeda</string>
+    <string name="fenix_name">Ikki</string>
+    <string name="pegasus_name">Seiya</string>
+    <string name="dragon_name">Shiryu</string>
+    <string name="cisne_name">Hyoga</string>
+    <string name="andromeda_name">Shawn</string>
 
 </resources>

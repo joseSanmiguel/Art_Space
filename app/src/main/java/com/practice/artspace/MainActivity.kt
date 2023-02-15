@@ -12,13 +12,16 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.practice.artspace.ui.theme.ArtSpaceTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,45 +42,54 @@ class MainActivity : ComponentActivity() {
 }
 
 //Joint whole functions to make the application
-@Composable
 @Preview(showSystemUi = true)
+@Composable
 fun ArtSpace() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        ImageDisplay()
-        Spacer(modifier = Modifier.size(8.dp))
-        TextDescription()
-        Spacer(modifier = Modifier.size(8.dp))
+    Column (horizontalAlignment = Alignment.CenterHorizontally){
+        ImageDisplay(saint = stringResource(id = R.string.fenix),
+            name = stringResource(id = R.string.fenix)
+        )
         ButtonsNextAndPrevious()
     }
-
 }
 
 @Composable
-fun ImageDisplay() {
-    Image(
-        painter = painterResource(id = R.drawable.fenix),
-        contentDescription = stringResource(id = R.string.fenix)
-    )
+    fun ImageDisplay(saint: String, name: String) {
+    val image = painterResource(id = R.drawable.fenix)
+    val shell = stringResource(id = R.string.fenix)
+    Box {
+        Image(
+            painter = image,
+            contentDescription = shell
+        )
+    }
+    TextDisplay(saint = saint, name = name)
 }
 
 @Composable
-fun TextDescription(caballeros: Caballeros) {
-    Text(text = caballeros.armadura)
-    Text(text = caballeros.nombreReal)
-    Text(text = caballeros.poderEspecial)
+fun TextDisplay(saint: String, name: String){
+    Column() {
+        Text(text = saint, fontSize = 30.sp, fontWeight = FontWeight.Bold)
+        Text(text = name, fontSize = 26.sp)
+    }
 }
 
 @Composable
 fun ButtonsNextAndPrevious() {
+    var sticker by remember {mutableStateOf(1)}
+    val imageResource = when (sticker) {
+        1 -> R.drawable.fenix
+        2 -> R.drawable.andromeda
+        3 -> R.drawable.dragon
+        4 -> R.drawable.cisne
+        else -> R.drawable.pegasus
+    }
     Row {
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Previous")
         }
         Spacer(modifier = Modifier.size(8.dp))
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { sticker = (1..5).random()}) {
             Text(text = "Next")
         }
     }
