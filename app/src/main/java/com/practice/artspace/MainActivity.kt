@@ -30,10 +30,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ArtSpaceTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                Surface(modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background) {
                     ArtSpace()
                 }
             }
@@ -45,38 +43,14 @@ class MainActivity : ComponentActivity() {
 @Preview(showSystemUi = true)
 @Composable
 fun ArtSpace() {
-    Column (horizontalAlignment = Alignment.CenterHorizontally){
-        ImageDisplay(saint = stringResource(id = R.string.fenix),
-            name = stringResource(id = R.string.fenix)
-        )
-        ButtonsNextAndPrevious()
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        ImageDisplay()
     }
 }
 
 @Composable
-    fun ImageDisplay(saint: String, name: String) {
-    val image = painterResource(id = R.drawable.fenix)
-    val shell = stringResource(id = R.string.fenix)
-    Box {
-        Image(
-            painter = image,
-            contentDescription = shell
-        )
-    }
-    TextDisplay(saint = saint, name = name)
-}
-
-@Composable
-fun TextDisplay(saint: String, name: String){
-    Column() {
-        Text(text = saint, fontSize = 30.sp, fontWeight = FontWeight.Bold)
-        Text(text = name, fontSize = 26.sp)
-    }
-}
-
-@Composable
-fun ButtonsNextAndPrevious() {
-    var sticker by remember {mutableStateOf(1)}
+fun ImageDisplay() {
+    var sticker by remember { mutableStateOf(1) }
     val imageResource = when (sticker) {
         1 -> R.drawable.fenix
         2 -> R.drawable.andromeda
@@ -84,13 +58,38 @@ fun ButtonsNextAndPrevious() {
         4 -> R.drawable.cisne
         else -> R.drawable.pegasus
     }
+    val clothResource = when (sticker) {
+        1 -> R.string.fenix
+        2 -> R.string.andromeda
+        3 -> R.string.dragon
+        4 -> R.string.cisne
+        else -> R.string.pegasus
+    }
+    val nameResource = when (sticker) {
+        1 -> R.string.fenix_name
+        2 -> R.string.andromeda_name
+        3 -> R.string.dragon_name
+        4 -> R.string.cisne_name
+        else -> R.string.pegasus_name
+    }
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(painter = painterResource(id = imageResource),
+            contentDescription = sticker.toString())
+        Text(text = stringResource(clothResource),
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold)
+        Text(text = stringResource(nameResource), fontSize = 26.sp)
+    }
+    Spacer(modifier = Modifier.size(8.dp))
     Row {
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Previous")
         }
         Spacer(modifier = Modifier.size(8.dp))
-        Button(onClick = { sticker = (1..5).random()}) {
+        Button(onClick = { sticker = (1..5).random() }) {
             Text(text = "Next")
         }
     }
 }
+
+
